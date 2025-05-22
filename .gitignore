@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# yml文件忽略
+application.yml
