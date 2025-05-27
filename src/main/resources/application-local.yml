@@ -28,11 +28,11 @@ mybatis-plus:
 
 cos:
   client:
-    host: https://xbai-1310263739.cos.ap-chengdu.myqcloud.com
-    secret-id: AKIDb5OTZYN3e4dcYO9qSvBF7qOlvseGfqoj
-    secret-key: oPo379C3ukcMFB4pQQJzTlsohS2TlsmS
-    region: ap-chengdu
-    bucket: xbai-1310263739
+    host:
+    secret-id:
+    secret-key:
+    region:
+    bucket:
 
 
 #接口文档
