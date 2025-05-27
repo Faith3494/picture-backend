@@ -224,6 +224,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         request.getSession().setAttribute(UserConstant.USER_LOGIN_STATE, user);
         return this.getLoginUserVO(user);
     }
+
+    @Override
+    public boolean isAdmin(User user) {
+        return user != null && UserRoleEnum.ADMIN.getValue().equals(user.getUserRole());
+    }
+
 }
 
 

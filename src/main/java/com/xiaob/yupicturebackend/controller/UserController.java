@@ -63,6 +63,19 @@ public class UserController {
     }
 
     /**
+     * 获取当前登录用户
+     *
+     * @param request
+     * @return
+     */
+    @GetMapping("/get/login")
+    public BaseResponse<LoginUserVO> getLoginUser(HttpServletRequest request) {
+        User loginUser = userService.getLoginUser(request);
+        return ResultUtils.success(userService.getLoginUserVO(loginUser));
+    }
+
+
+    /**
      * 用户注销
      */
     @PostMapping("/logout")
@@ -149,8 +162,7 @@ public class UserController {
         int current = userQueryRequest.getCurrent();
         int pageSize = userQueryRequest.getPageSize();
         Page<User> userPage = userService.page(new Page<>(current, pageSize), userService.getQueryWrapper(userQueryRequest));
-
-        Page<UserVO> userVOPage = new Page<>(current,pageSize, userPage.getTotal());
+        Page<UserVO> userVOPage = new Page<>(current, pageSize, userPage.getTotal());
         List<UserVO> userVOList = userService.getUserVOList(userPage.getRecords());
         userVOPage.setRecords(userVOList);
         return ResultUtils.success(userVOPage);
