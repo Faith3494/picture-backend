@@ -45,6 +45,13 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture>
         this.userService = userService;
     }
 
+    /**
+     * 更新图片
+     * @param multipartFile 更新文件
+     * @param pictureUploadRequest 接受参数
+     * @param loginUser 用户参数
+     * @return 图片对象
+     */
     @Override
     public PictureVO uploadPicture(MultipartFile multipartFile, PictureUploadRequest pictureUploadRequest, User loginUser) {
         ThrowUtils.throwIf(loginUser == null, ErrorCode.NO_AUTH_ERROR);
@@ -85,6 +92,11 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture>
         return PictureVO.objToVo(picture);
     }
 
+    /**
+     * 获取图片对象
+     * @param pictureQueryRequest 黄获取图片参数
+     * @return 返回图片集合
+     */
     @Override
     public QueryWrapper<Picture> getQueryWrapper(PictureQueryRequest pictureQueryRequest) {
         QueryWrapper<Picture> queryWrapper = new QueryWrapper<>();
@@ -135,6 +147,12 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture>
         return queryWrapper;
     }
 
+    /**
+     * 封装对象
+     * @param picture 图片对象
+     * @param request 请求参数
+     * @return 脱敏图片
+     */
     @Override
     public PictureVO getPictureVO(Picture picture, HttpServletRequest request) {
 //        获取对象封装类
@@ -149,6 +167,12 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture>
         return pictureVO;
     }
 
+    /**
+     * 获取脱敏图片列表
+     * @param picturePage 获取数量
+     * @param request 用户参数
+     * @return 图片集合
+     */
     @Override
     public Page<PictureVO> getPictureVOPage(Page<Picture> picturePage, HttpServletRequest request) {
         List<Picture> pictureList = picturePage.getRecords();
@@ -175,20 +199,24 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture>
         return pictureVOPage;
     }
 
+    /**
+     * 数据校验
+     * @param picture 图片对象
+     */
     @Override
-    public void validatePicture(Picture picture) {
-        ThrowUtils.throwIf(picture == null,ErrorCode.PARAMS_ERROR);
-//        从对象中取值
+    public void validPicture(Picture picture) {
+        ThrowUtils.throwIf(picture == null, ErrorCode.PARAMS_ERROR);
+        // 从对象中取值
         Long id = picture.getId();
         String url = picture.getUrl();
         String introduction = picture.getIntroduction();
-        //  数据修改时，id不能为空，有参数则校验
-        ThrowUtils.throwIf(ObjUtil.isNull(id),ErrorCode.PARAMS_ERROR,"id不能为空");
+        // 修改数据时，id 不能为空，有参数则校验
+        ThrowUtils.throwIf(ObjUtil.isNull(id), ErrorCode.PARAMS_ERROR, "id 不能为空");
         if (StrUtil.isNotBlank(url)) {
-            ThrowUtils.throwIf(url.length()>1024,ErrorCode.PARAMS_ERROR,"url过长");
+            ThrowUtils.throwIf(url.length() > 1024, ErrorCode.PARAMS_ERROR, "url 过长");
         }
         if (StrUtil.isNotBlank(introduction)) {
-            ThrowUtils.throwIf(introduction.length()>800,ErrorCode.PARAMS_ERROR,"简介过长");
+            ThrowUtils.throwIf(introduction.length() > 800, ErrorCode.PARAMS_ERROR, "简介过长");
         }
     }
 

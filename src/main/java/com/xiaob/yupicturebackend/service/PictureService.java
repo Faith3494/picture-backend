@@ -36,6 +36,8 @@ public interface PictureService extends IService<Picture> {
 
     public Page<PictureVO> getPictureVOPage(Page<Picture> picturePage,  HttpServletRequest request);
 
-//    图片数据校验，更新和修改图片进行判断
-    public void validatePicture(Picture picture);
+
+
+    //    图片数据校验，更新和修改图片进行判断
+    public void validPicture(Picture picture);
 }

@@ -85,7 +85,7 @@ public class PictureController {
         // 要将List 转化为String
         picture.setTags(JSONUtil.toJsonStr(pictureUpdateRequest.getTags()));
         // 数据校验
-        pictureService.validatePicture(picture);
+        pictureService.validPicture(picture);
         // 判断是否存在
         long id = pictureUpdateRequest.getId();
         Picture oldPicture = pictureService.getById(id);
